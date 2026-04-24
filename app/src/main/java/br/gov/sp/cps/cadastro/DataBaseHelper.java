@@ -31,7 +31,7 @@ public class DataBaseHelper {
 
     //Criando tabela
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE" + TABLE_NAME + "(ID INTERGER PRIMARY KEY AUTOINCREMENT, NOME TEXT, IDADE INTERGER)");
+        db.execSQL("CREATE_TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NOME TEXT, IDADE INTERGER, ALTURA DOUBLE, PESO INTEGER, IMC TEXT )");
     }
 
     @Override
@@ -88,11 +88,22 @@ public class DataBaseHelper {
         valores.put(COL_3, novaIdade);
 
         //armazena novo valor para altura
+        int linhasAfetadas = db.update(TABLE_NAME, valores, COL_2 + "=?",
+          new String[]{}
+        );
 
         //armazena novo valor para peso
+        db.close();
+
+        return linhasAfetadas > 0;
 
     }
 
+    //Metodo deletar
+    public boolean deletarDados(String nome){
+        SQLiteDatabase db = this.getWritabledatabase();
+
+    }
 
 
 }
